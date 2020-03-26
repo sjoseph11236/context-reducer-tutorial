@@ -6,7 +6,9 @@ const reducer = (state, action) => {
     case 'INCREMENT':
       return { count: state.count + 1 } 
     case 'DECREMENT':
-      return { count: state.count - 1 } 
+      return { count: state.count - 1 }
+    case "RESET": 
+      return { count: 0 }
       default:
         throw new Error();
   }
@@ -21,6 +23,7 @@ function Counter() {
       Count: { state.count }
       <button onClick={()=> dispatch({type: "INCREMENT"}) }>+</button>
       <button onClick={()=> dispatch({type: "DECREMENT"}) }>-</button>
+      <button onClick={()=> dispatch({type: "RESET"})}>reset</button>
       {/* Count: {count}
       <button onClick={()=> setCount(count+1) }>+</button> */}
     </> 
@@ -34,6 +37,7 @@ function App() {
   // INTIAL STEP UP FOR USE STATE
   // const [count, setCount] = useState(0);
   return (
+    // value is the equivalent to store in redux
     <CountContext.Provider value={stateDispatchObj}>
       <Counter />
     </CountContext.Provider>
