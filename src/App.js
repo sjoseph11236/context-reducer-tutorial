@@ -3,7 +3,7 @@ import React, { useState, useReducer} from 'react';
 
 const reducer = (state, action) => { 
   switch(action.type) { 
-    case 'INCREMTENT':
+    case 'INCREMENT':
       return { count: state.count + 1 } 
       default:
         throw new Error();
