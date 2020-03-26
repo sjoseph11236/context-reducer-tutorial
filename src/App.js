@@ -7,6 +7,8 @@ const reducer = (state, action) => {
       return { count: state.count + 1 } 
     case 'DECREMENT':
       return { count: state.count - 1 }
+    case "INCREMENTBYCUSTOM":
+      return { count: state.count + action.payload }
     case "RESET": 
       return { count: 0 }
       default:
@@ -18,12 +20,16 @@ const CountContext = createContext();
 
 function Counter() {
   const [state, dispatch] = useContext(CountContext);
+  const [countInput, setCountInput] = useState(0);
   return (
     <>
       Count: { state.count }
       <button onClick={()=> dispatch({type: "INCREMENT"}) }>+</button>
       <button onClick={()=> dispatch({type: "DECREMENT"}) }>-</button>
       <button onClick={()=> dispatch({type: "RESET"})}>reset</button>
+      <br />
+      <input type="number" name="" id="" onChange={(evt)=> setCountInput(Number(evt.target.value))} placeholder="Give me an incrementor"/>
+      <button onClick={()=> dispatch({type: "INCREMENTBYCUSTOM", payload: countInput})}>Increment Now</button>
       {/* Count: {count}
       <button onClick={()=> setCount(count+1) }>+</button> */}
     </> 
