@@ -16,6 +16,7 @@ const reducer = (state, action) => {
   }
 }
 
+
 const CountContext = createContext();
 
 function Counter() {
@@ -28,15 +29,28 @@ function Counter() {
       <button onClick={()=> dispatch({type: "DECREMENT"}) }>-</button>
       <button onClick={()=> dispatch({type: "RESET"})}>reset</button>
       <br />
-      <input type="number" name="" id="" onChange={(evt)=> setCountInput(Number(evt.target.value))} placeholder="Give me an incrementor"/>
+      <input type="number" onChange={(evt)=> setCountInput(Number(evt.target.value))} placeholder="Give me an incrementor"/>
       <button onClick={()=> dispatch({type: "INCREMENTBYCUSTOM", payload: countInput})}>Increment Now</button>
       {/* Count: {count}
       <button onClick={()=> setCount(count+1) }>+</button> */}
     </> 
   )  
 }
-function App() {
 
+const UnrelatedCompContainer = () => { 
+  return <UnrelatedComp />
+}
+
+const UnrelatedComp = () => { 
+  const [state, dispatch] = useContext(CountContext);
+  return (
+    <>
+      Count: { state.count }
+      <button onClick={()=> dispatch({type: "INCREMENT"}) }>+</button>
+    </>
+  )
+}
+function App() {
   const stateDispatchObj = useReducer(reducer, { count: 0 })
   // INITIAL STEP UP FOR USE REDUCER
   // const [state, dispatch] = useReducer(reducer, { count: 0 })
@@ -46,6 +60,8 @@ function App() {
     // value is the equivalent to store in redux
     <CountContext.Provider value={stateDispatchObj}>
       <Counter />
+      <hr/>
+      <UnrelatedCompContainer />
     </CountContext.Provider>
   );
 }
