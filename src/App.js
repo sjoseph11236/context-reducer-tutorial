@@ -50,8 +50,10 @@ const UnrelatedComp = () => {
     </>
   )
 }
+
+const initalState = { count: 0};
 function App() {
-  const stateDispatchObj = useReducer(reducer, { count: 0 })
+  const stateDispatchObj = useReducer(reducer,  initalState);
   // INITIAL STEP UP FOR USE REDUCER
   // const [state, dispatch] = useReducer(reducer, { count: 0 })
   // INTIAL STEP UP FOR USE STATE
